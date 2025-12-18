@@ -17,17 +17,24 @@ new Chart(document.getElementById('graficoResumenManual'), {
   data: {
     labels: ['Ingresos', 'Egresos', 'Sapucai'],
     datasets: [{
-      data: [ingresos, egresos, sapucai]
+      data: [ingresos, egresos, sapucai],
+      backgroundColor: [
+        '#1e88e5', // azul - Ingresos
+        '#fbc02d', // amarillo - Egresos
+        '#43a047'  // verde - Sapucai
+      ]
     }]
   },
   options: {
+    responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       legend: { display: false }
     },
     scales: {
       y: {
         ticks: {
-          callback: function(value) {
+          callback: function (value) {
             return value.toLocaleString();
           }
         }
