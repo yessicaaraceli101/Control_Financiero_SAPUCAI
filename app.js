@@ -14,29 +14,39 @@ new Chart(document.getElementById('graficoResumenManual'), {
   type: 'bar',
   data: {
     labels: ['Ingresos', 'Egresos', 'Sapucai'],
-    datasets: [{
-      data: [ingresos, egresos, sapucai],
-      backgroundColor: [
-        '#1e88e5', // azul - Ingresos
-        '#fbc02d', // amarillo - Egresos
-        '#43a047'  // verde - Sapucai
-      ]
-    }]
+     datasets: [{
+  data: [ingresos, egresos, sapucai],
+  backgroundColor: [
+    '#1e88e5', // azul
+    '#fbc02d', // amarillo
+    '#43a047'  // verde
+  ],
+  barThickness: 50,      // 🔹 barras más finas
+  maxBarThickness: 60,   // 🔹 límite de grosor
+  categoryPercentage: 0.6, // 🔹 menos ancho de categoría
+  barPercentage: 0.7       // 🔹 más aire entre barras
+}]
+
   },
   options: {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-      legend: { display: false }
+  responsive: false,
+  maintainAspectRatio: true,
+  plugins: {
+    legend: { display: false }
+  },
+  scales: {
+    x: {
+      grid: {
+        display: false   // 🔹 menos ruido visual
+      }
     },
-    scales: {
-      y: {
-        ticks: {
-          callback: function (value) {
-            return value.toLocaleString();
-          }
+    y: {
+      ticks: {
+        callback: function (value) {
+          return value.toLocaleString();
         }
       }
     }
   }
+}
 });
