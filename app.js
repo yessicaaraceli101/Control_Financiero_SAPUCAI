@@ -1,51 +1,52 @@
+const ingresos = 20503000;
+const egresos = 8455000;
+const sapucai = 6700000;
 
-fetch('data/diciembre-2025.csv')
-  .then(r => r.text())
-  .then(t => {
-    const lines = t.trim().split(/\r?\n/).slice(1);
+// Mostrar en tarjetas
+document.getElementById('ingresos').innerText = ingresos.toLocaleString();
+document.getElementById('egresos').innerText = egresos.toLocaleString();
+document.getElementById('sapucai').innerText = sapucai.toLocaleString();
+document.getElementById('balance').innerText =
+  (ingresos - egresos).toLocaleString();
 
-    let ingresos = 0;
-    let egresos = 0;
-    let sapucai = 0;
-    let efectivo = 0;
-    let transferencia = 0;
 
-    lines.forEach(l => {
-      const c = l.split(';');
-
-      const ing = parseFloat(c[2]?.replace(/\./g,'').replace(',','.')) || 0;
-      const egr = parseFloat(c[3]?.replace(/\./g,'').replace(',','.')) || 0;
-      const sap = parseFloat(c[4]?.replace(/\./g,'').replace(',','.')) || 0;
-      const obs = (c[6] || '').toUpperCase();
-
-      ingresos += ing;
-      egresos += egr;
-      sapucai += sap;
-
-      if (ing > 0) {
-        if (obs.includes('EFECTIVO')) efectivo += ing;
-        else transferencia += ing;
+// =====================
+// GRÁFICO 1: INGRESOS / EGRESOS / SAPUCAI
+// =====================
+new Chart(document.getElementById('graficoIngresos'), {
+  type: 'bar',
+  data: {
+    labels: ['Ingresos', 'Egresos', 'Sapucai'],
+    datasets: [{
+      data: [ingresos, egresos, sapucai]
+    }]
+  },
+  options: {
+    plugins: {
+      legend: { display: false }
+    },
+    scales: {
+      y: {
+        ticks: {
+          callback: function(value) {
+            return value.toLocaleString();
+          }
+        }
       }
-    });
+    }
+  }
+});
 
-    document.getElementById('ingresos').innerText = ingresos.toLocaleString();
-    document.getElementById('egresos').innerText = egresos.toLocaleString();
-    document.getElementById('balance').innerText = (ingresos - egresos).toLocaleString();
-    document.getElementById('sapucai').innerText = sapucai.toLocaleString();
 
-    new Chart(document.getElementById('graficoIngresos'), {
-      type: 'bar',
-      data: {
-        labels: ['Ingresos','Egresos'],
-        datasets: [{ data:[ingresos, egresos] }]
-      }
-    });
-
-    new Chart(document.getElementById('graficoMedio'), {
-      type: 'pie',
-      data: {
-        labels: ['Efectivo','Transferencia'],
-        datasets: [{ data:[efectivo, transferencia] }]
-      }
-    });
-  });
+// =====================
+// GRÁFICO 2: EGRESOS vs SAPUCAI
+// =====================
+new Chart(document.getElementById('graficoMedio'), {
+  type: 'pie',
+  data: {
+    labels: ['Egresos', 'Sapucai'],
+    datasets: [{
+      data: [egresos, sapucai]
+    }]
+  }
+});
