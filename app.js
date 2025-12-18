@@ -6,8 +6,6 @@ const sapucai = 6700000;
 document.getElementById('ingresos').innerText = ingresos.toLocaleString();
 document.getElementById('egresos').innerText = egresos.toLocaleString();
 document.getElementById('sapucai').innerText = sapucai.toLocaleString();
-document.getElementById('balance').innerText =
-  (ingresos - egresos).toLocaleString();
 
 // =====================
 // GRÁFICO NUEVO (LIMPIO)
