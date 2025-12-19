@@ -94,7 +94,7 @@ new Chart(document.getElementById('graficoResumenManual'), {
         barThickness: 14
       },
       {
-        label: 'Resultado del mes',
+        label: 'Saldo',
         data: [
           resultadoMes(datos.octubre),
           resultadoMes(datos.noviembre),
