@@ -1,48 +1,69 @@
+// =====================
+// DATOS MANUALES POR MES
+// =====================
 const datos = {
   octubre: {
     ingresos: 27830000,
-    egresos: 12376000,
-    sapucai: 6150000
+    egresos: 16676000,
+    pagado: 16676000,
+    pendiente: 0           
   },
   noviembre: {
-    ingresos: 33406000,
-    egresos: 7016820,
-    sapucai: 12900000
+    ingresos: 27670000,
+    egresos: 14266820,
+    pagado: 12900000,
+    pendiente: 160000     
   },
   diciembre: {
-    ingresos: 20503000,
-    egresos: 8455000,
-    sapucai: 6700000
+    ingresos: 21283000,
+    egresos: 14115000,
+    pagado: 6700000,
+    pendiente: 13376000      
   }
 };
 
 // =====================
-// MOSTRAR TARJETAS
+// FUNCIONES
 // =====================
+function resultadoMes(mes) {
+  return mes.ingresos - mes.egresos;
+}
 
+// =====================
 // OCTUBRE
+// =====================
 document.getElementById('ing_oct').innerText =
   datos.octubre.ingresos.toLocaleString();
 document.getElementById('egr_oct').innerText =
   datos.octubre.egresos.toLocaleString();
-document.getElementById('sap_oct').innerText =
-  datos.octubre.sapucai.toLocaleString();
+document.getElementById('res_oct').innerText =
+  resultadoMes(datos.octubre).toLocaleString();
+document.getElementById('pen_oct').innerText =
+  datos.octubre.pendiente.toLocaleString();
 
+// =====================
 // NOVIEMBRE
+// =====================
 document.getElementById('ing_nov').innerText =
   datos.noviembre.ingresos.toLocaleString();
 document.getElementById('egr_nov').innerText =
   datos.noviembre.egresos.toLocaleString();
-document.getElementById('sap_nov').innerText =
-  datos.noviembre.sapucai.toLocaleString();
+document.getElementById('res_nov').innerText =
+  resultadoMes(datos.noviembre).toLocaleString();
+document.getElementById('pen_nov').innerText =
+  datos.noviembre.pendiente.toLocaleString();
 
+// =====================
 // DICIEMBRE
+// =====================
 document.getElementById('ing_dic').innerText =
   datos.diciembre.ingresos.toLocaleString();
 document.getElementById('egr_dic').innerText =
   datos.diciembre.egresos.toLocaleString();
-document.getElementById('sap_dic').innerText =
-  datos.diciembre.sapucai.toLocaleString();
+document.getElementById('res_dic').innerText =
+  resultadoMes(datos.diciembre).toLocaleString();
+document.getElementById('pen_dic').innerText =
+  datos.diciembre.pendiente.toLocaleString();
 
 // =====================
 // GRÁFICO COMPARATIVO
@@ -60,7 +81,7 @@ new Chart(document.getElementById('graficoResumenManual'), {
           datos.diciembre.ingresos
         ],
         backgroundColor: '#1e88e5',
-        barThickness: 18
+        barThickness: 14
       },
       {
         label: 'Egresos',
@@ -70,17 +91,27 @@ new Chart(document.getElementById('graficoResumenManual'), {
           datos.diciembre.egresos
         ],
         backgroundColor: '#fbc02d',
-        barThickness: 18
+        barThickness: 14
       },
       {
-        label: 'Sapucai',
+        label: 'Resultado del mes',
         data: [
-          datos.octubre.sapucai,
-          datos.noviembre.sapucai,
-          datos.diciembre.sapucai
+          resultadoMes(datos.octubre),
+          resultadoMes(datos.noviembre),
+          resultadoMes(datos.diciembre)
         ],
-        backgroundColor: '#43a047',
-        barThickness: 18
+        backgroundColor: '#6a1b9a',
+        barThickness: 14
+      },
+      {
+        label: 'Pendiente de pago',
+        data: [
+          datos.octubre.pendiente,
+          datos.noviembre.pendiente,
+          datos.diciembre.pendiente
+        ],
+        backgroundColor: '#e53935',
+        barThickness: 14
       }
     ]
   },
