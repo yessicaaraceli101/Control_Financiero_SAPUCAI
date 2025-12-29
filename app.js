@@ -3,22 +3,22 @@
 // =====================
 const datos = {
   octubre: {
-    ingresos: 27830000,
-    egresos: 16676000,
+    ingresos: 53160000,
+    egresos: 52667076,
     pagado: 16676000,
-    pendiente: 0           
+    pendiente: 1850000          
   },
   noviembre: {
-    ingresos: 27670000,
-    egresos: 14266820,
+    ingresos: 63185000,
+    egresos: 42506741,
     pagado: 12900000,
-    pendiente: 160000     
+    pendiente: 2250000     
   },
   diciembre: {
-    ingresos: 27443000,
-    egresos: 14630500,
+    ingresos: 37360000,
+    egresos: 44983113,
     pagado: 6700000,
-    pendiente: 9506000      
+    pendiente: 20250000     
   }
 };
 
